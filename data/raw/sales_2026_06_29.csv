@@ -1,0 +1,7 @@
+transaction_id,sale_date,store_id,customer_id,product_id,quantity,unit_price,discount_amount,payment_method
+T0006,2026-06-29,S002,C1002,P1002,4,3.79,0.00,Credit Card
+T0007,2026-06-29,S003,C1003,P1001,6,2.49,1.25,Mobile Wallet
+T0008,2026-06-29,S004,C1006,P1006,2,9.99,2.00,Debit Card
+T0009,2026-06-29,S001,C1001,P1005,1,11.99,0.00,Credit Card
+T0010,2026-06-29,S002,C9999,P1004,1,8.99,0.00,Cash
+T0011,2026-06-29,S003,C1005,P1003,-1,4.25,0.00,Cash

@@ -1,0 +1,7 @@
+product_id,product_name,category,brand,unit_cost,current_price
+P1001,Organic Apples,Produce,FreshFarm,1.10,2.49
+P1002,Whole Milk,Dairy,DairyPure,1.85,3.79
+P1003,Sourdough Bread,Bakery,DailyBake,1.25,4.25
+P1004,Chicken Breast,Meat,ButcherBox,4.25,8.99
+P1005,Laundry Detergent,Household,CleanWave,5.40,11.99
+P1006,Ground Coffee,Beverage,RoastHouse,4.60,9.99

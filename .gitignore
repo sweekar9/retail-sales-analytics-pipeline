@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Generated local warehouse and reporting exports
+outputs/*.sqlite
+outputs/*.db
+outputs/marts/*.csv
+outputs/*.zip
+
+# Local scratch/build workspace
+work/

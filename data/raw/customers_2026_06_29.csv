@@ -1,0 +1,7 @@
+customer_id,first_name,last_name,email,city,state,segment,loyalty_tier,effective_date
+C1001,Ava,Patel,ava.patel@example.com,Seattle,WA,Family,Gold,2026-06-29
+C1002,Liam,Chen,liam.chen@example.com,Chicago,IL,Family,Gold,2026-06-29
+C1003,Sophia,Rivera,sophia.rivera@example.com,Atlanta,GA,Premium,Gold,2026-06-29
+C1004,Noah,Smith,noah.smith@example.com,Boston,MA,Value,Bronze,2026-06-29
+C1005,Emma,Johnson,emma.johnson@example.com,Seattle,WA,Family,Silver,2026-06-29
+C1006,Mia,Brown,mia.brown@example.com,Portland,OR,Premium,Silver,2026-06-29

@@ -1,0 +1,6 @@
+# Local demo requires only Python 3 standard library.
+#
+# Optional production/runtime packages:
+# pyspark==3.5.1
+# psycopg2-binary==2.9.9
+# pyodbc==5.1.0

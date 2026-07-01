@@ -1,0 +1,5 @@
+{
+  "warehouse_path": "outputs/retail_sales_warehouse.sqlite",
+  "raw_data_path": "data/raw",
+  "mart_output_path": "outputs/marts"
+}

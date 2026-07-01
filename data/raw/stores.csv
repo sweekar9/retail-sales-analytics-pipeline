@@ -1,0 +1,5 @@
+store_id,store_name,city,state,region,opened_date
+S001,Downtown Market,Seattle,WA,West,2018-04-12
+S002,Lakeside Grocery,Chicago,IL,Midwest,2019-08-03
+S003,Peachtree Retail,Atlanta,GA,South,2020-02-19
+S004,Harbor Foods,Boston,MA,Northeast,2017-11-28
