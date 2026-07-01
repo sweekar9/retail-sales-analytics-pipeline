@@ -1,26 +1,25 @@
 # Retail Sales Analytics Pipeline
 
-An end-to-end retail analytics project using Python, SQL warehouse design, PySpark reference code, and Power BI-ready reporting marts.
+Retail sales ETL project that loads daily transaction files into a small star-schema warehouse. The local version runs with Python and SQLite so the pipeline can be tested without a database server. SQL scripts are included for PostgreSQL and SQL Server.
 
-## What This Project Demonstrates
+## Features
 
-- Multi-location retail sales ingestion from daily CSV drops.
-- Star schema warehouse design with `FactSales`, `DimCustomer`, `DimProduct`, `DimStore`, and `DimDate`.
-- Incremental loading through a file audit table.
-- Data validation with rejected-row logging.
-- Type 2 customer history tracking for segment and loyalty changes.
-- Indexed SQL warehouse scripts for PostgreSQL and SQL Server.
-- Power BI-ready mart exports for sales trends, customer segmentation, and inventory analysis.
+- Loads sales, customer, product, and store CSV files from multiple locations.
+- Builds a star schema with `FactSales`, `DimCustomer`, `DimProduct`, `DimStore`, and `DimDate`.
+- Tracks loaded files to avoid duplicate processing.
+- Validates incoming sales records and stores rejected rows with a reason.
+- Keeps customer segment and loyalty changes using type 2 history.
+- Exports simple reporting datasets for sales trends, customer segments, and product performance.
 
 ## Project Structure
 
 ```text
 data/raw/                     Source retail data files
 src/run_pipeline.py            Local runnable ETL pipeline
-src/run_pyspark_pipeline.py    PySpark reference implementation
+src/run_pyspark_pipeline.py    Spark version for larger file loads
 sql/                           PostgreSQL, SQL Server, and reporting SQL
 powerbi/dashboard_guide.md     Power BI report build guide
-outputs/                       Generated local warehouse and marts
+outputs/                       Generated warehouse and reporting files
 ```
 
 Generated files are written to:
@@ -38,28 +37,26 @@ From the repository root:
 python3 src/run_pipeline.py
 ```
 
-The local run uses SQLite so it works without installing PostgreSQL, SQL Server, pandas, or PySpark.
+The local run uses SQLite and Python's standard library. PostgreSQL, SQL Server, pandas, and PySpark are not required for the first run.
 
 ## Quick Start
 
 ```bash
-git clone <your-repo-url>
-cd retail-sales-analytics-pipeline
 python3 src/run_pipeline.py
 ```
 
-After the run, open the generated CSVs in `outputs/marts` or connect Power BI to those files.
+After the run, use the CSVs in `outputs/marts` for reporting or Power BI import.
 
 ## Source Data
 
-The sample data models two daily drops:
+The sample data includes two daily file drops:
 
 - `customers_2026_06_28.csv`
 - `customers_2026_06_29.csv`
 - `sales_2026_06_28.csv`
 - `sales_2026_06_29.csv`
 
-One customer changes segment and loyalty tier on `2026-06-29`, creating a new `DimCustomer` history record. The second sales file also includes invalid rows so validation can reject them and preserve auditability.
+One customer changes segment and loyalty tier on `2026-06-29`, which creates a new `DimCustomer` version. The second sales file also contains invalid rows so the validation and rejection flow can be tested.
 
 ## Warehouse Model
 
@@ -99,9 +96,9 @@ Each source file is recorded in `etl_loaded_files` after processing. Re-running 
 
 Invalid sales records are stored in `etl_rejections` with the file name, transaction id, reason, and rejection timestamp.
 
-## Power BI Outputs
+## Reporting Outputs
 
-The pipeline exports three business-friendly CSV marts:
+The pipeline exports three CSV datasets:
 
 - `sales_trends.csv`
 - `customer_segments.csv`
@@ -109,10 +106,14 @@ The pipeline exports three business-friendly CSV marts:
 
 See `powerbi/dashboard_guide.md` for recommended dashboard pages and visuals.
 
+## Validation Run
+
+The latest local row counts and rejection totals are documented in `TEST_RESULTS.md`.
+
 ## Production Notes
 
 - Use `sql/postgres_schema.sql` for PostgreSQL deployments.
 - Use `sql/sql_server_schema.sql` for SQL Server deployments.
-- Use `src/run_pyspark_pipeline.py` as the Spark/JDBC reference for larger file volumes.
+- Use `src/run_pyspark_pipeline.py` as a Spark/JDBC version for larger file volumes.
 - Schedule ingestion with Airflow, cron, SQL Server Agent, or a cloud scheduler.
 - Store database credentials in environment variables or a secrets manager.

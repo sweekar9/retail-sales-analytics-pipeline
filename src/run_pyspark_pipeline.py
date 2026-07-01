@@ -1,11 +1,11 @@
-"""
-PySpark reference implementation for production-scale execution.
+"""Spark version of the retail sales pipeline.
 
-The local demo uses src/run_pipeline.py because it requires no external
-packages. This file shows how the same raw files can be transformed with
-Spark before writing to PostgreSQL or SQL Server through JDBC.
+The main pipeline in src/run_pipeline.py is easier to run locally because it
+uses SQLite and Python's standard library. This version keeps the same source
+files but writes staging tables through JDBC for a larger warehouse setup.
 """
 
+import os
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
@@ -18,11 +18,11 @@ def main():
     )
 
     raw_path = "data/raw"
-    jdbc_url = "jdbc:postgresql://localhost:5432/retail_analytics"
+    jdbc_url = os.getenv("RETAIL_JDBC_URL", "jdbc:postgresql://localhost:5432/retail_analytics")
     jdbc_props = {
-        "user": "retail_user",
-        "password": "change_me",
-        "driver": "org.postgresql.Driver",
+        "user": os.getenv("RETAIL_DB_USER", "retail_user"),
+        "password": os.getenv("RETAIL_DB_PASSWORD", ""),
+        "driver": os.getenv("RETAIL_JDBC_DRIVER", "org.postgresql.Driver"),
     }
 
     products = spark.read.option("header", True).csv(f"{raw_path}/products.csv")
